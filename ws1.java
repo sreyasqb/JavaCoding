@@ -5,9 +5,14 @@
  */
 package ws1;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -27,7 +32,9 @@ public class Ws1 {
 //        q7();
 //        q8();
 //        q9();
-        q10();
+//        q10();
+//        q11();
+        q12();
     }
     public static void q1(){
         Scanner inp= new Scanner(System.in);
@@ -142,6 +149,59 @@ public class Ws1 {
             System.out.println(Arrays.toString(arr));
         }
         
+        
+    }
+    public static void q11(){
+        Scanner kb= new Scanner(System.in);
+        System.out.print("Enter 1st number : ");
+        int lowLimit= kb.nextInt();
+        System.out.print("Enter 1st number : ");
+        int upLimit= kb.nextInt();
+        
+        for (int i=lowLimit;i<=upLimit;i++){
+            int j;
+            for (j=2;j<(int) Math.sqrt(i) + 1;j++){
+                if (i%j==0)
+                    break;       
+            }
+            if (j==(int) Math.sqrt(i)+1){
+                System.out.println(i);
+            }
+        }
+    }
+    public static void q12(){
+        HashMap <String,Integer> runners= new HashMap<String,Integer>();
+        runners.put("Verstappen", 319);
+        runners.put("Russel", 273);
+        runners.put("Hamilton",278);
+        runners.put("Leclerc",316);
+        runners.put("Checo",300);
+        runners.put("Sainz",315);
+//        int[] a={1,2,3};
+//        System.out.println(Arrays.toString(a));
+//    List<Integer> timeArr= runners.values().stream().collect(Collectors.toList());
+//    System.out.println(timeArr);
+//    Collections.sort(timeArr);
+//    System.out.println(timeArr);
+       List<Integer> timeArr= new ArrayList<Integer>(runners.values());
+       List<String> nameArr= new ArrayList<String>(runners.keySet());
+       System.out.println(timeArr);
+       int m1=0,m2=0;
+       String n1="",n2="";
+       for (int i=0;i<timeArr.size();i++){
+           if (timeArr.get(i)>m1){
+               m2=m1;
+               n2=n1;
+               m1=timeArr.get(i);
+               n1=nameArr.get(i);
+           }
+           else if (timeArr.get(i)>m2){
+               m2=timeArr.get(i);
+               n2=nameArr.get(i);
+           }
+       }
+       System.out.println(n1 + " : " + m1);
+       System.out.println(n2 + " : " + m2);
         
     }
     
