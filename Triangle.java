@@ -20,6 +20,9 @@ public class Triangle {
         area=0;
         color="red";
     }
+    void setColor(String c){
+        color=c;
+    }
     double findArea(){
         double s=(x+y+z)/2;
         area=Math.sqrt(s*(s-x)*(s-y)*(s-z));
@@ -45,6 +48,11 @@ public class Triangle {
             return true;
         return false;
     }
+    boolean isEquilateral(){
+        if ((x==y && y==z && x==z) &&  (x+y>z))
+            return true;
+        return false;
+    }
     public static void main(String[] args){
         Triangle t=new Triangle(3,4,5);
         System.out.println(t.isRight());
@@ -52,5 +60,6 @@ public class Triangle {
         System.out.println(t.findArea());
         System.out.println(t.isTriangle());
         System.out.println(t.isScalene());
+        System.out.println(t.isEquilateral());
     }
 }
