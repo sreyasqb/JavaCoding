@@ -19,6 +19,7 @@ public class Triangle {
         this.z=z;
         area=0;
         color="red";
+        area=findArea();
     }
     void setColor(String c){
         color=c;
@@ -39,27 +40,34 @@ public class Triangle {
         return false;
     }
     boolean isIsosceles(){
-        if ((x==y || y==z || x==z) &&  (x+y>z))
+        if ((x==y || y==z || x==z) &&  isTriangle())
             return true;
         return false;
     }
     boolean isScalene(){
-        if (x!=y && y!=z && z!=x && x+y>z)
+        if (x!=y && y!=z && z!=x && isTriangle())
             return true;
         return false;
     }
     boolean isEquilateral(){
-        if ((x==y && y==z && x==z) &&  (x+y>z))
+        if ((x==y && y==z) &&  isTriangle())
+            return true;
+        return false;
+    }
+    boolean matchRect(Triangle t){
+        if (area==t.area && color==t.color)
             return true;
         return false;
     }
     public static void main(String[] args){
         Triangle t=new Triangle(3,4,5);
+        Triangle t2=new Triangle(3,4,5);
         System.out.println(t.isRight());
         System.out.println(t.isIsosceles());
         System.out.println(t.findArea());
         System.out.println(t.isTriangle());
         System.out.println(t.isScalene());
         System.out.println(t.isEquilateral());
+        System.out.println(t.matchRect(t2));
     }
 }
