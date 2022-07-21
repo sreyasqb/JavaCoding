@@ -14,6 +14,10 @@ public class Account {
     String owner;
     String accNo;
     static int numAccounts;
+    static int noWithdraw;
+    static int noDeposit;
+    static double amWithdraw;
+    static double amDeposit;
     Account(double initBal,String owner,String number){
         this.bal=initBal;
         this.owner=owner;
@@ -34,10 +38,15 @@ public class Account {
     }
     public void deposit(double value){
         bal+=value;
+        noDeposit+=1;
+        amDeposit+=value;
     }
     public void withdraw(double value){
-        if (bal-value>0)
+        if (bal-value>0){
             bal-=value;
+            noWithdraw+=1;
+            amWithdraw+=value;
+        }
         else
             System.out.println("Not enough balance");
     }
@@ -49,6 +58,11 @@ public class Account {
     public static int getNumAccounts(){
         return numAccounts;
     }
+    public void close(){
+        numAccounts-=1;
+        owner+="CLOSED";
+        bal=0;
+    }
     public static void main(String args[]){
         Account a=new Account("SUSA");
         Account b=new Account("BSA");
@@ -58,6 +72,13 @@ public class Account {
         a.withdraw(50);
         a.getDeets();
         System.out.println(Account.getNumAccounts());
+        a.close();
+        a.getDeets();
+        System.out.println(Account.getNumAccounts());
+        System.out.println(amWithdraw);
+        System.out.println(amDeposit);
+        System.out.println(noWithdraw);
+        System.out.println(noDeposit);
     }
     
 }
